@@ -1,3 +1,6 @@
+//global variables
+let isDarkMode = false;
+
 // Map Styles with Labels
 const createStyle = (color, strokeColor, strokeWidth = 2) => {
     return new ol.style.Style({
@@ -10,10 +13,10 @@ const createStyle = (color, strokeColor, strokeWidth = 2) => {
         }),
         text: new ol.style.Text({
             font: '14px "Open Sans", "Arial Unicode MS", sans-serif',
-            fill: new ol.style.Fill({ color: '#000' }),
+            fill: new ol.style.Fill({ color: '#fff' }),
             stroke: new ol.style.Stroke({
-                color: '#fff',
-                width: 4
+                color: '#000',
+                width: 2
             }),
             overflow: true,
             offsetY: -15,
@@ -26,7 +29,7 @@ const createStyle = (color, strokeColor, strokeWidth = 2) => {
 };
 
 // Define styles with fixed widths
-const styles = {
+let styles = {
     academic: createStyle('rgba(0, 0, 255, 0.2)', 'rgba(0, 0, 255, 1)'),
     grass: createStyle('rgba(0, 255, 0, 0.2)', 'rgba(0, 255, 0, 1)'),
     hostel: createStyle('rgba(255, 165, 0, 0.2)', 'rgba(255, 165, 0, 1)'),
@@ -121,6 +124,124 @@ const styles = {
     })
 };
 
+let darkstyles = {
+    academic: createStyle('rgba(30, 60, 200, 0.2)', 'rgba(30, 60, 200, 1)'),
+    grass: createStyle('rgba(0, 100, 0, 0.2)', 'rgba(0, 255, 100, 1)'),
+    hostel: createStyle('rgba(255, 140, 0, 0.2)', 'rgba(255, 140, 0, 1)'),
+    mess: createStyle('rgba(200, 0, 0, 0.2)', 'rgba(255, 80, 80, 1)'),
+    parking: createStyle('rgba(180, 180, 180, 0.1)', 'rgba(200, 200, 200, 0.8)'),
+    sports: createStyle('rgba(138, 43, 226, 0.2)', 'rgba(186, 85, 211, 1)'),
+    shops: createStyle('rgba(255, 165, 0, 0.2)', 'rgba(255, 180, 0, 1)'),
+    temple: createStyle('rgba(160, 82, 45, 0.2)', 'rgba(205, 133, 63, 1)'),
+    
+    walkways: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: '#A0522D',
+            width: 2
+        }),
+        text: new ol.style.Text({
+            font: '12px "Roboto", "Open Sans", "Arial", sans-serif',
+            fill: new ol.style.Fill({ color: '#e0e0e0' }),
+            stroke: new ol.style.Stroke({
+                color: 'rgba(0, 0, 0, 0.6)',
+                width: 3
+            }),
+            overflow: true,
+            offsetY: -10,
+            padding: [4, 4, 4, 4],
+            textAlign: 'center',
+            textBaseline: 'middle',
+            placement: 'line'
+        })
+    }),
+
+    circles: createStyle('rgba(100, 100, 100, 0.2)', 'rgba(200, 200, 200, 1)'),
+
+    roads_main: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: '#807e7e',
+            width: 3,
+            lineCap: 'round',
+            lineJoin: 'round'
+        }),
+        text: new ol.style.Text({
+            font: '12px "Roboto", "Open Sans", "Arial", sans-serif',
+            fill: new ol.style.Fill({ color: '#e0e0e0' }),
+            stroke: new ol.style.Stroke({
+                color: 'rgba(0, 0, 0, 0.6)',
+                width: 3
+            }),
+            overflow: true,
+            offsetY: -10,
+            padding: [4, 4, 4, 4],
+            textAlign: 'center',
+            textBaseline: 'middle',
+            placement: 'line'
+        })
+    }),
+
+    roads_second: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: '#999999',
+            width: 2,
+            lineCap: 'round',
+            lineJoin: 'round'
+        }),
+        text: new ol.style.Text({
+            font: '12px "Roboto", "Open Sans", "Arial", sans-serif',
+            fill: new ol.style.Fill({ color: '#e0e0e0' }),
+            stroke: new ol.style.Stroke({
+                color: 'rgba(0, 0, 0, 0.6)',
+                width: 3
+            }),
+            overflow: true,
+            offsetY: -10,
+            padding: [4, 4, 4, 4],
+            textAlign: 'center',
+            textBaseline: 'middle',
+            placement: 'line'
+        })
+    }),
+
+    under_construction: new ol.style.Style({
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 0, 0.1)'
+        }),
+        stroke: new ol.style.Stroke({
+            color: '#FFFF00',
+            width: 2,
+            lineDash: [10, 10]
+        }),
+        text: new ol.style.Text({
+            font: '12px "Roboto", "Open Sans", "Arial", sans-serif',
+            fill: new ol.style.Fill({ color: '#e0e0e0' }),
+            stroke: new ol.style.Stroke({
+                color: 'rgba(0, 0, 0, 0.6)',
+                width: 3
+            }),
+            overflow: true,
+            offsetY: -10,
+            padding: [4, 4, 4, 4],
+            textAlign: 'center',
+            textBaseline: 'middle',
+            placement: 'line'
+        })
+    }),
+
+    tree: new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 5,
+            fill: new ol.style.Fill({
+                color: 'rgba(0, 128, 0, 0.8)'
+            })
+        })
+    })
+};
+
+
+
+
+
 // Function to create style with label
 function createLabeledStyle(feature, baseStyle) {
     const shops = feature.get('Shops');
@@ -172,7 +293,7 @@ const map = new ol.Map({
     view: new ol.View({
         center: [0, 0],
         zoom: 17,
-        minZoom: 16,
+        minZoom: 15, //change s/16/15, to fit whole map on page resolve
         maxZoom: 19,
         constrainRotation: false // Allow map rotation
     }),
@@ -217,9 +338,49 @@ function addGeoJSONLayer(url, style, id) {
     
     return vectorLayer;
 }
+//added darkmode
+//toggles css for bg and checks for global var
+//swaps styles, reintializes layerconfigs, removes all layers, regen all new layers
+function darkmode() {
+    document.getElementById("map").classList.toggle("darkmode");
+    isDarkMode = !isDarkMode;
+
+    let temp = styles;
+    styles = darkstyles;
+    darkstyles = temp;
+    
+    let layerConfigs = {
+        academic: { url: 'data/Academic_Blocks.geojson', style: styles.academic },
+        grass: { url: 'data/Grasscover.geojson', style: styles.grass },
+        hostel: { url: 'data/Hostels.geojson', style: styles.hostel },
+        mess: { url: 'data/Mess.geojson', style: styles.mess },
+        parking: { url: 'data/Parking.geojson', style: styles.parking },
+        sports: { url: 'data/Sports.geojson', style: styles.sports },
+        shops: { url: 'data/Shops.geojson', style: styles.shops },
+        temple: { url: 'data/temple.geojson', style: styles.temple },
+        tree: { url: 'data/Trees.geojson', style: styles.tree },
+        walkways: { url: 'data/walkways.geojson', style: styles.walkways },
+        circles: { url: 'data/circles.geojson', style: styles.circles },
+        roads_main: { url: 'data/roads_main.geojson', style: styles.roads_main },
+        roads_second: { url: 'data/roads_second.geojson', style: styles.roads_second },
+        under_construction: { url: 'data/Under_Construction.geojson', style: styles.under_construction }
+    };
+
+    map.getLayers().getArray().slice().forEach(function(layer) {
+        if (layer instanceof ol.layer.Vector) {
+            map.removeLayer(layer);
+        }
+    });
+
+    Object.entries(layerConfigs).forEach(([id, config]) => {
+        addGeoJSONLayer(config.url, config.style, id);
+    });
+
+}
+
 
 // Add Layers
-const layerConfigs = {
+let layerConfigs = {
     academic: { url: 'data/Academic_Blocks.geojson', style: styles.academic },
     grass: { url: 'data/Grasscover.geojson', style: styles.grass },
     hostel: { url: 'data/Hostels.geojson', style: styles.hostel },

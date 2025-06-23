@@ -146,6 +146,10 @@ html, body {
     height: 100%;
     background-color: #f0f0f0;
 }
+/* added dark mode 7b7b7b */
+.darkmode {
+    background-color: #2b2b2b;
+}
 
 /* Search Panel */
 .search-panel {
