@@ -654,16 +654,16 @@ map.on('pointermove', function(event) {
 });
 
 // Update Stats
-map.getView().on('change:resolution', function() {
-    currentZoom.textContent = `Zoom: ${Math.round(map.getView().getZoom())}`;
-});
+//map.getView().on('', function() {
+//    currentZoom.textContent = `Zoom: ${Math.round(map.getView().getZoom())}`;
+//});
 
 // Update Time
-function updateTime() {
-    currentTime.textContent = new Date().toLocaleTimeString();
-}
-setInterval(updateTime, 1000);
+// function updateTime() {
+//    currentTime.textContent = new Date().toLocaleTimeString();
+//}
+//setInterval(updateTime, 1000);
 
 // Initialize Map
 fitMapToFeatures();
-updateTime();
+//updateTime();
