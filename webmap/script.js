@@ -125,25 +125,25 @@ let styles = {
 };
 
 let darkstyles = {
-    academic: createStyle('rgba(30, 60, 200, 0.2)', 'rgba(30, 60, 200, 1)'),
-    grass: createStyle('rgba(0, 100, 0, 0.2)', 'rgba(0, 255, 100, 1)'),
-    hostel: createStyle('rgba(255, 140, 0, 0.2)', 'rgba(255, 140, 0, 1)'),
-    mess: createStyle('rgba(200, 0, 0, 0.2)', 'rgba(255, 80, 80, 1)'),
-    parking: createStyle('rgba(180, 180, 180, 0.1)', 'rgba(200, 200, 200, 0.8)'),
-    sports: createStyle('rgba(138, 43, 226, 0.2)', 'rgba(186, 85, 211, 1)'),
-    shops: createStyle('rgba(255, 165, 0, 0.2)', 'rgba(255, 180, 0, 1)'),
-    temple: createStyle('rgba(160, 82, 45, 0.2)', 'rgba(205, 133, 63, 1)'),
-    
+    academic: createStyle('rgba(40, 60, 100, 0.15)', 'rgba(60, 90, 140, 0.9)'),
+    grass: createStyle('rgba(30, 60, 30, 0.1)', 'rgba(60, 100, 60, 0.8)'),
+    hostel: createStyle('rgba(100, 70, 40, 0.1)', 'rgba(160, 110, 70, 0.9)'),
+    mess: createStyle('rgba(100, 40, 40, 0.1)', 'rgba(160, 60, 60, 0.9)'),
+    parking: createStyle('rgba(100, 100, 100, 0.05)', 'rgba(150, 150, 150, 0.7)'),
+    sports: createStyle('rgba(80, 60, 120, 0.1)', 'rgba(130, 100, 180, 0.8)'),
+    shops: createStyle('rgba(120, 80, 30, 0.1)', 'rgba(180, 120, 60, 0.85)'),
+    temple: createStyle('rgba(90, 60, 40, 0.1)', 'rgba(150, 100, 70, 0.85)'),
+
     walkways: new ol.style.Style({
         stroke: new ol.style.Stroke({
-            color: '#A0522D',
+            color: '#6a4e3a',
             width: 2
         }),
         text: new ol.style.Text({
             font: '12px "Roboto", "Open Sans", "Arial", sans-serif',
-            fill: new ol.style.Fill({ color: '#e0e0e0' }),
+            fill: new ol.style.Fill({ color: '#ccc' }),
             stroke: new ol.style.Stroke({
-                color: 'rgba(0, 0, 0, 0.6)',
+                color: 'rgba(0, 0, 0, 0.5)',
                 width: 3
             }),
             overflow: true,
@@ -155,20 +155,20 @@ let darkstyles = {
         })
     }),
 
-    circles: createStyle('rgba(100, 100, 100, 0.2)', 'rgba(200, 200, 200, 1)'),
+    circles: createStyle('rgba(120, 120, 120, 0.1)', 'rgba(170, 170, 170, 0.8)'),
 
     roads_main: new ol.style.Style({
         stroke: new ol.style.Stroke({
-            color: '#807e7e',
+            color: '#5a5a5a',
             width: 3,
             lineCap: 'round',
             lineJoin: 'round'
         }),
         text: new ol.style.Text({
             font: '12px "Roboto", "Open Sans", "Arial", sans-serif',
-            fill: new ol.style.Fill({ color: '#e0e0e0' }),
+            fill: new ol.style.Fill({ color: '#d0d0d0' }),
             stroke: new ol.style.Stroke({
-                color: 'rgba(0, 0, 0, 0.6)',
+                color: 'rgba(0, 0, 0, 0.5)',
                 width: 3
             }),
             overflow: true,
@@ -182,16 +182,16 @@ let darkstyles = {
 
     roads_second: new ol.style.Style({
         stroke: new ol.style.Stroke({
-            color: '#999999',
+            color: '#777',
             width: 2,
             lineCap: 'round',
             lineJoin: 'round'
         }),
         text: new ol.style.Text({
             font: '12px "Roboto", "Open Sans", "Arial", sans-serif',
-            fill: new ol.style.Fill({ color: '#e0e0e0' }),
+            fill: new ol.style.Fill({ color: '#c0c0c0' }),
             stroke: new ol.style.Stroke({
-                color: 'rgba(0, 0, 0, 0.6)',
+                color: 'rgba(0, 0, 0, 0.5)',
                 width: 3
             }),
             overflow: true,
@@ -205,18 +205,18 @@ let darkstyles = {
 
     under_construction: new ol.style.Style({
         fill: new ol.style.Fill({
-            color: 'rgba(255, 255, 0, 0.1)'
+            color: 'rgba(255, 255, 100, 0.05)'
         }),
         stroke: new ol.style.Stroke({
-            color: '#FFFF00',
+            color: '#ccc200',
             width: 2,
             lineDash: [10, 10]
         }),
         text: new ol.style.Text({
             font: '12px "Roboto", "Open Sans", "Arial", sans-serif',
-            fill: new ol.style.Fill({ color: '#e0e0e0' }),
+            fill: new ol.style.Fill({ color: '#dcdcdc' }),
             stroke: new ol.style.Stroke({
-                color: 'rgba(0, 0, 0, 0.6)',
+                color: 'rgba(0, 0, 0, 0.5)',
                 width: 3
             }),
             overflow: true,
@@ -232,11 +232,12 @@ let darkstyles = {
         image: new ol.style.Circle({
             radius: 5,
             fill: new ol.style.Fill({
-                color: 'rgba(0, 128, 0, 0.8)'
+                color: 'rgba(40, 90, 40, 0.8)'
             })
         })
     })
 };
+
 
 
 
