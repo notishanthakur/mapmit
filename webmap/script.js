@@ -345,7 +345,7 @@ function addGeoJSONLayer(url, style, id) {
 function darkmode() {
     document.getElementById("map").classList.toggle("darkmode");
     isDarkMode = !isDarkMode;
-
+    
     let temp = styles;
     styles = darkstyles;
     darkstyles = temp;
@@ -376,7 +376,11 @@ function darkmode() {
     Object.entries(layerConfigs).forEach(([id, config]) => {
         addGeoJSONLayer(config.url, config.style, id);
     });
+    
+    const icon = document.getElementById("toggle-icon");
+    const isDark = document.getElementById("darkToggle").checked;
 
+    icon.className = isDark ? "fa-regular fa-sun" : "fa-solid fa-moon";
 }
 
 
