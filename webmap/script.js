@@ -344,6 +344,8 @@ function addGeoJSONLayer(url, style, id) {
 //swaps styles, reintializes layerconfigs, removes all layers, regen all new layers
 function darkmode() {
     document.getElementById("map").classList.toggle("darkmode");
+    //document.getElementById("legend-panel active").classList.toggle("darkmode2");
+    
     isDarkMode = !isDarkMode;
     
     let temp = styles;
@@ -376,7 +378,7 @@ function darkmode() {
     Object.entries(layerConfigs).forEach(([id, config]) => {
         addGeoJSONLayer(config.url, config.style, id);
     });
-    
+    map.addLayer(userPositionLayer);
     const icon = document.getElementById("toggle-icon");
     const isDark = document.getElementById("darkToggle").checked;
 
@@ -418,7 +420,7 @@ let userPositionLayer = new ol.layer.Vector({
                 color: 'rgb(188,20,20)'
             }),
             stroke: new ol.style.Stroke({
-                color: '#322d2d',
+                color: '#454544',
                 width: 5
             })
         })
@@ -481,17 +483,21 @@ function startPositionTracking() {
                 if (isPositionNearMapExtent(coordinates)) {
                     map.getView().animate({
                         center: coordinates,
-                        duration: 500
+                        duration: 0
                     });
                 } else {
                     // If user is far from map extent, show notification and disable following
                     // but still keep the map visible
                     showLocationWarning();
+                    
+                    
                     followUserPosition = false;
                     trackingButton.classList.remove('active');
                     
+                    
                     // Ensure map is still visible by fitting to features
                     fitMapToFeatures();
+
                 }
             }
         }
@@ -513,7 +519,7 @@ function startPositionTracking() {
 
 document.addEventListener("DOMContentLoaded", function () {
     // Your existing code here
-    startPositionTracking();  // Ensure this runs only after user interaction
+    //startPositionTracking();  // Ensure this runs only after user interaction
 });
 
 // Show warning when user is far from the mapped area
@@ -576,10 +582,11 @@ const trackingButton = document.getElementById('toggleTracking');
 trackingButton.addEventListener('click', () => {
     followUserPosition = !followUserPosition;
     trackingButton.classList.toggle('active');
-    
+
     if (followUserPosition && geolocation.getPosition()) {
         const coordinates = geolocation.getPosition();
         if (isPositionNearMapExtent(coordinates)) {
+            
             map.getView().animate({
                 center: coordinates,
                 duration: 500
@@ -588,16 +595,15 @@ trackingButton.addEventListener('click', () => {
             showLocationWarning();
             followUserPosition = false;
             trackingButton.classList.remove('active');
-            
             // Ensure map is still visible by fitting to features
-            fitMapToFeatures();
+            // fitMapToFeatures();
+
         }
     } else {
         // If tracking is disabled, ensure map is centered on features
         fitMapToFeatures();
     }
 });
-
 
 
 // Fit Map to Features
@@ -812,13 +818,6 @@ map.on('click', function(event) {
     }
 });
 
-// Hover Effect
-map.on('pointermove', function(event) {
-    const pixel = map.getEventPixel(event.originalEvent);
-    const hit = map.hasFeatureAtPixel(pixel);
-    map.getTarget().style.cursor = hit ? 'pointer' : '';
-});
-
 // Update Stats
 //map.getView().on('', function() {
 //    currentZoom.textContent = `Zoom: ${Math.round(map.getView().getZoom())}`;
@@ -832,4 +831,4 @@ map.on('pointermove', function(event) {
 
 // Initialize Map
 fitMapToFeatures();
-//updateTime();
+startPositionTracking();
