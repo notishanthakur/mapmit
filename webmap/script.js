@@ -344,7 +344,8 @@ function addGeoJSONLayer(url, style, id) {
 //swaps styles, reintializes layerconfigs, removes all layers, regen all new layers
 function darkmode() {
     document.getElementById("map").classList.toggle("darkmode");
-    //document.getElementById("legend-panel active").classList.toggle("darkmode2");
+    document.getElementById("legendPanel").classList.toggle("darkmode2");
+    document.getElementById("searchPanel").classList.toggle("darkmode2");
     
     isDarkMode = !isDarkMode;
     
